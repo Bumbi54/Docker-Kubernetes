@@ -1,0 +1,23 @@
+Line starts with single word instruction telling docker what to do.
+  For example: "FROM", "RUN", "CMD"
+
+For cache it makes a difference order of commands.
+
+"FROM"
+  Docker image what we want to use as a base image.
+
+"RUN"
+  Execute some command.
+
+"CMD"
+  Start-up command of container.
+
+"COPY"
+  Copy file into a container/image.
+  On rebuild if one of the file was changed cache will no longer be used to commands after this one.
+
+"WORKDIR"
+  Specify work directory of container.
+  Any other command will be relative to this path.
+  If this folder doesn't exit it will create it.
+  After this we can't use cache version of later commands.

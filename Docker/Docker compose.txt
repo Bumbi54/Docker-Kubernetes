@@ -1,0 +1,42 @@
+Specific syntax.
+  Uses yaml format.
+
+"version: '3'"
+  Version of docker compose we want to use.
+
+"services:"
+  In broad terms in means container.
+  Something in the line of type of container.
+  In this element we write names or containers we want to create.
+  For each container name we specify if we want to build it by:
+    Using predefined image:
+      "image: 'redis'"
+    Using Dockerfile:
+      "build : ."
+        Where Dockerfile is located in same directory as our "docker-compose.yaml" files.
+
+Port-mapping for each of containers is done with:
+  """
+  ports:
+    - "4081:8081"
+  """
+    We can specify multiple port-mapping by just adding more "-" in new lines. This is an array.
+    First is port on local machine and second port on container.
+
+If we create containers in same docker compose file by default they are in same network and can communicate with each other.
+  Without opening ports.
+  Container name can be used as hostname in other containers.
+
+Example("docker-compose.yaml"):
+"""
+version: '3'
+services:
+        redis-server:
+                image: 'redis'
+        node-app:
+                restart: always
+                build : .
+                ports:
+                  - "4081:8081"
+
+"""

@@ -1,0 +1,64 @@
+Image:
+  Single file with all the dependencies and configurations required to run a program.
+  File system Snapshot.
+  Contains "Startup Command":
+    -For example "Run Chrome"
+
+Container:
+  Instance of an image. Runs a program.
+
+Namespacing:
+  Isolating resources per process (or group of processes)
+    On hard disk.
+
+Control Groups (cgroups):
+  Limit amount of resources used per process.
+
+Docker run = docker create + docker run
+
+Can't change default command on already created container.
+
+Two containers do NOT share file system.
+
+Create custom images.
+  Use dockerfile.
+    Custom configuration.
+    Pass it to docker client (docker-cli).
+    Docker server build image that be used as container.
+    Steps:
+      1. Specify an image
+      2. Run commands to install additional programs
+        It executes as primary command in temporary container.
+      3. Specify start up command
+        It doesn't execute this command but set it as start up.
+    For all steps except first (base image) some temporary container is created (in memory).
+      After each step stop temporary container, take snapshot of file system and save it as temporary image.
+      Each next step takes temporary image from previous step.
+    At the end final file system is saved as image.
+
+    When creating images with base image and command similar to the one already created, docker can use temporary container form cache to speed things up.
+
+Image can be created from container.
+
+First couple (10) of characters of container ID can be used as ID.
+  When we get really long ID.
+
+"alpine"
+  A word used to describe image that is as small as possible.
+  As basic as possible.
+
+To access web application in container we need to do port-mapping.
+  At runtime of container.
+
+Restart policy is defined in docker-compose file for each individual container (service):
+  "restart: always"
+
+Restart policies:
+  "no"
+    Never attempt to restart this . container if it sops or crashes.
+  "always"
+    If this container stops 'for any reason' always attempt to restart it
+  "on-failure"
+    Only restart if the container stops with an error code
+  "unless-stopped"
+    Always restart unless we (the developers) forcibly stop it

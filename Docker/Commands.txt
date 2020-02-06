@@ -1,0 +1,75 @@
+#docker run <image name> <command>
+  -"docker" reference to docker client
+  -"run" create and run container
+  -"<image name>" name of image to use for this container
+  -<command> is optional and used to overwrite default command
+  -"-d" execute container in the background
+
+  Run container and connect to it immediately:
+    #docker run -it busybox sh
+    Add "-p" to add port-forwarding.
+      #docker run -p 8080:8080 idrmic/simpleweb
+
+Delete stopped containers:
+  #docker system prune
+    This also deletes cache (images retrieved from network).
+
+Docker "logs":
+  Get data from container.
+    #docker logs <container_ID>
+      All the logs ever from this container.
+  This doesn't rerun the container.
+
+Stop docker container:
+  #docker stop <container_ID>
+    Send a "SIGTERM" message.
+    After 10 second "kill" will be send automatically.
+  #docker kill <container_ID>
+    Send a "SIGKILL" message.
+      Shut down right now! Without any additional work.
+
+Execute additional information in docker container:
+  #docker exec-it <container_ID> <command>
+  Ability to get and send text - "-it".
+  "-i"
+    Attach terminal to "STDIN" channel of new running process (command).
+  -"t"
+    Show all text going in and out in a nice formatted way.
+
+Get shell access to running container:
+  #docker exec -it d878d29b5257 sh
+    "sh" - command processor
+      Program that allows us to execute command on computers.
+    Same with "bash".
+
+Build docker image:
+  #docker build .
+    Give dockerfile to docker to create image.
+  "-t"
+    Tag a image.
+    Convection:
+      "Your Docker ID" + "/" + "Project name" + ":" + "Version"
+
+We can use command "docker" to set up network between two containers.
+  It is bit handful.
+    Lot of commands that need to be run every time we start containers.
+    Alternative "docker compose"!
+      Separate tool.
+
+"docker compose"
+  Start up multiple Docker containers at the same time.
+  Automates some of the "docker run" parameters.
+
+"docker-compose up"
+  Start containers from docker compose.
+    Looks into current directory and looks for file "docker-compose.yaml".
+  "-d" start containers in background.
+
+"docker-compose up"
+  Stop all container in docker compose (from docker compose file).
+
+"docker-compose up --build"
+  Rebuild containers.
+
+  "docker-compose ps"
+    List status of running containers in current directory (that has docker-compose.yaml file).
