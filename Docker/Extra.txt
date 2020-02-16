@@ -1,0 +1,9 @@
+Environmental variables:
+  https://docs.docker.com/engine/reference/run/#env-environment-variables
+  https://create-react-app.dev/docs/running-tests/#linux-macos-bash
+
+
+In docker run "-- --coverage"??
+
+Elastic beanstalk
+  Easiest way to deploy a single container.

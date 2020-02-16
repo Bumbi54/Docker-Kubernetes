@@ -1,0 +1,51 @@
+Feed config file to kubectl:
+  #kubectl apply -f FILE_NAME
+    Load configuration into our cluster.
+
+Get status of group of objects:
+  #kubectl get OBJECT_TYPE
+    -pods
+    -services
+    Additional information:
+      " -o wide"
+
+Get Minikube VM IP address:
+  #minkube ip
+
+Get details about object:
+  #kubectl describer OBJECT_TYPE OBJECT_NAME
+    OBJECT_NAME is nor required, without we get information about all objects with this type.
+
+Delete object:
+  Use config used to create it with command:
+    #kubectl delete -f CONFIG_FILE
+    Imperative update.
+    Same as deleting container (give it  10 sec to close).
+
+Update specific property:
+  #kubectl set
+  For image:
+    #kubectl set image OBJECT_TYPE/OBJECT_NAME CONTAINER_NAME=FULL_IMAGE_TO_USE
+
+
+Reconfigure local docker-cli to connect to docker server in VM (Node):
+  #eval$(minikube docker-env)
+    This is only for current terminal window.
+
+Load multiple config files:
+  #kubectl apply -f FOLDER_NAME
+
+Imperative delete:
+  #kubectl delete deployment client-deployment
+
+Options kubernets has to set persistent volumes:
+  #kubectl get storageclass
+
+List persistent volumes:
+  #kubectl get pv
+  Status "Bound" means it is in use.
+  "pvc"
+    To list claims.
+
+
+    

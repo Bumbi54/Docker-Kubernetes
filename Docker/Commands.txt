@@ -73,3 +73,7 @@ We can use command "docker" to set up network between two containers.
 
   "docker-compose ps"
     List status of running containers in current directory (that has docker-compose.yaml file).
+
+
+"docker push TAG"
+  Push image into Docker hub.

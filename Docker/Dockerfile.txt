@@ -21,3 +21,14 @@ For cache it makes a difference order of commands.
   Any other command will be relative to this path.
   If this folder doesn't exit it will create it.
   After this we can't use cache version of later commands.
+
+We can tag a phase:
+  "FROM node:alpine as builder"
+    Key word "as".
+  Use a tag in same Dockerfile in next step:
+    "COPY --from=builder /app/build /usr/share/nginx/html"
+      From phase "builder" copy folder "/app/build" to folder "/usr/share/nginx/html" in current phase.
+
+"EXPOSE"
+  Expose a port.
+  Does nothing for us automaticly.

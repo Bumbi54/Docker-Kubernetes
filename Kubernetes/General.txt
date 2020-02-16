@@ -1,0 +1,89 @@
+Kubernetes expects all images too already be build.
+On config file per object we want to create.
+We have to manually set up networking.
+
+We need to be very explicit with networking.
+
+We don't have ability just to run single container without overhead.
+  Smallest thing to deploy is "Pod"
+
+Instead of container we are creating object (with config file).
+
+We use Config file to create "Objects".
+  We feed this files to "kubectl" command line tool.
+    "kubectl" create two objects from each file.
+
+
+Objects (a thing in about our cluster):
+  Have types.
+    "-Statefulset, -ReplicaController, -Pod, -Service"
+    For different purposes.
+      -Running a container
+      -Monitor a container
+      -Set a network
+
+"Node"
+  All nodes have program "kube-proxy".
+    Window to outside world.
+    All request go through this.
+
+"labels" and "component"
+  Service is not directly referring to pods but uses labels.
+  Service looks for any other Pod or object that has component value.
+  Key words "component" and its "value" can be changed. They are arbitrary.
+
+To access container in Node we need to use Minikube VM IP address and not localhost.
+
+Imperative vs. Declarative approach.
+
+Update of objects on node happens by object type and name.
+  So masters know which to update with new config file.
+  Update of pod is very restrictive only few parameters can be updated.
+
+Every pod gets IP address inside its Node VM.
+  This IP address is not static.
+
+Recreate container with new version:
+  Very hard.
+  Three solutions:
+    1. Manually delete pods.
+    2. Tagging images with versions
+    3. Use imperative command to update pod.
+
+If there are no changes to deploy file kubectl rejects apply command.
+
+All config files can be organized into single file.
+
+Volume in kubernetes is an object that allows a container to store data at pod level.
+  Is tied to specific pod.
+  Data is persistent between containers in pods but not between pods (recreated pods).
+
+Persistent Volume:
+  Volume outside of Pod.
+  Even in a case where pod crashed or is deleted.
+
+Persistent Volume Claim:
+  They are advertisement of Volumes.
+  Here are different option you have for storage in cluster.
+  We write in config file this options that are available in cluster.
+
+Statically provisioned volume is volume we provisioned ahead of time.
+On the fly is called dynamic.
+
+PVC (Persistent Volume Claim) for postgres!
+
+
+We are writing config files that describe desired state.
+
+Ingress config:
+  We write set of routing rules to get traffic to services.
+  Default backend is created when we create Ingress (another deployment).
+    It makes sure that cluster work as expected.
+    It is better them manual configuration because it is aware it works in cluster. For example directly routing to container in pod (sticky session).
+    Health check.
+  We don't use hostnames but use names of deployments.
+
+
+Kind "Namespace"?
+
+Replica, replica controller?

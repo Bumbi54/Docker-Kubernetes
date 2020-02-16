@@ -1,0 +1,88 @@
+"kind:"
+  Type of Object.
+  - "Pod"
+    Created on Node.
+    One or more containers.
+    Run a container.
+    Used for development.
+    Grouping of containers with very common purpose.
+      Or container that must be run together.
+        For example "logger" or "backup".
+  - "Service"
+    Set up networking in cluster.
+    Resolves problem with not static IP address on pods.
+    Sub types ("spec" section):
+      - ClusterIP
+        Restrictive form of networking.
+        Object is visible in our cluster but not from outside.
+        Traffic can't come from outside of cluster.
+      - NodePort
+          Expose container to outside world.
+          Mostly for dev.
+          Sets up communication layer between outside world and container.
+          "ports"
+            "targetPort" is port in container.
+            "port"
+              Port that other Pod or container can use to access our Pod.
+            "nodePort"
+              Port we access from outside world (browser).
+              If not set it is randomly selected.
+
+      - LoadBalancer
+        Legacy way of getting network traffic into cluster.
+        Allows access to one set of pods.
+        Different types of implementations. For example Nginx implementation.
+        "ingress-nginx"
+          Setup is different depending on where we deploy it.
+      - Ingress
+        Exposes set of services to outside world.
+  - Deployment
+        Set of identical pods.
+        Ensures that they have correct config.
+        Similar to pod.
+        God for both dev and prod.
+        Monitor state of each pod. Update, restart, keep them running.
+        Create form pod-template.
+        On update it tries to change current pod or kill it and create new.
+        "template"
+          In this section we are listing configuration for all of the containers in this object.
+        "replicas"
+          Number of pods this object will have.
+          They will be identical.
+        "selector"
+          Handler on pod that is created: Label "(component, web)".
+  - "PersistentVolumeClaim"
+      Kubernetes needs to find slice of out hard drive that matches configuration in "spec" part.
+      Lot of parameters in "spec" are set by default.
+  - "Secret"
+      Securely save information.
+        For example database password.
+        Is create imperatively.
+          #kubectl create secret generic SECRET_NAME --from-literal key=value
+        Is object.
+
+
+"apiVersion"
+  Limits types of object types we can use.
+  Each API version defines different set of object types.
+
+"ports"
+  We want to expose port to outside world.
+  It is not enough. We need to use networking "Service".
+
+We can't use environmental variables.
+
+Instance of storage:
+  Slice of out hard drive.
+
+"AccessModes"
+  - ReadWriteOnce
+      Can be used by a single node.
+  - ReadOnlyMany
+      Multiple node can read from this.
+  - ReadWriteMany
+    Read and written by many nodes.
+
+Environment variable:
+    - name: REDIS_HOST
+      value: redis-cluster-ip-service

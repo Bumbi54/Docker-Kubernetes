@@ -40,3 +40,30 @@ services:
                   - "4081:8081"
 
 """
+
+Volumes:
+        """
+        volumes:
+                - /app/node_modules
+                - .:/app
+        """
+
+Advanced build:
+          """
+          build:
+            context: .
+              dockerfile: Dockerfile.dev
+          """
+
+Overwrite startup command:
+  """
+    command: ["npm", "run", "test"]
+  """
+
+Environmental variables:
+  Sets a variable in the container at run time.
+  It is not encoded in image.
+  Two ways:
+    "varName : value"
+    "varName"
+      Where this variable is taken from our computer at run time.
